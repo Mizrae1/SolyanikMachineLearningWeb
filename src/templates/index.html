@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>FLASK CSV File Upload</title>
+    <style>
+      body {
+        width: 100%;
+        min-height: 100vh;
+        background-color: #fff;
+      }
+
+      /* Основные свойства для бокового меню */
+      .menu {
+        display: flex;
+        flex-direction: column; /* размещаем элементы к колонку */
+        width: 350px;
+        min-height: 100vh; /* на всю высоту экрана */
+        position: fixed; /* чтобы меню было фиксированным */
+        top: 0; /* прижимаем к верхнему */
+        left: 0; /* .. и нижнему краю */
+        background-color: #cb4544;
+        box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2); /* задаем тень, чтобы отделить от фона */
+      }
+
+      /* Свойства для контента */
+      .content {
+        padding-left: 390px; /* отступ от бокового меню 240px + 40px */
+        padding-top: 40px;
+        padding-right: 40px;
+        padding-bottom: 40px;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center; /* центрируем логотип с текстом */
+        color: #0a0a0a;
+        font-size: 36px;
+        text-decoration: none;
+        font-family: "Rubik", sans-serif;
+        font-weight: bold;
+      }
+
+      /* Позиционирование лого в меню */
+      .menu__logo {
+        padding-top: 50px;
+        padding-left: 20px;
+        margin-bottom: 59px;
+      }
+
+      /* Позиционирование элементов в меню */
+      .menu__link,
+      .admin__link {
+        padding-left: 30px;
+      }
+
+      /* Свойства для элементов меню */
+      .link {
+        position: relative; /* чтобы задать потом псевдоэлемент */
+        display: flex; /* чтобы элемент тянулся на всю ширину */
+        align-items: center; /* по центру текст и иконка */
+        height: 45px; /* высота элемента 45px */
+        text-decoration: none;
+      }
+
+      /* Свойства иконки внутри ссылки */
+      .link > img {
+        width: 25px;
+        margin-right: 20px;
+      }
+
+      /* Свойства текста внутри ссылки */
+      .link > span {
+        font-family: "Karla", sans-serif;
+        font-size: 20px;
+        color: #0a0a0a;
+      }
+
+      /* При наведении на ссылку - полупрозрачный белый фон */
+      .link:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      /* Выводим черную линию слева */
+      .link:hover:before {
+        display: flex;
+      }
+
+      /* Создаем черную линию слева */
+      .link:before {
+        content: "";
+        display: none;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 5px;
+        height: 100%;
+        background-color: #0a0a0a;
+      }
+
+      /* Позиционирование админ-меню */
+      .menu__admin {
+        margin-top: auto;
+        padding-bottom: 40px;
+      }
+
+      .aligncenter {
+        text-align: center;
+      }
+    </style>
+</head>
+  <body>
+    <section class="menu">
+      <!-- Логотип -->
+      <a href="http://127.0.0.1:5000/download" class="menu__logo logo">Solyanik Analysis</a>
+      <!-- Основное меню -->
+      <ul class="menu__list list">
+        <!-- Элемент меню -->
+        <li class="menu__item item">
+          <!-- Ссылка меню -->
+          <a href="http://127.0.0.1:5000/download" class="menu__link link">
+            <span>Главная</span>
+          </a>
+        </li>
+        <li class="menu__item item">
+          <a href="http://127.0.0.1:5000/version" class="menu__link link">
+            <span>Версии</span>
+          </a>
+        </li>
+        <li class="menu__item item">
+          <a href="http://127.0.0.1:5000/info" class="menu__link link">
+            <span>Справочная информация</span>
+          </a>
+        </li>
+        <li class="menu__item item">
+          <a href="http://127.0.0.1:5000/autors" class="menu__link link">
+            <span>Авторы</span>
+          </a>
+        </li>
+        <li class="menu__item item">
+          <a href="http://127.0.0.1:5000/privacy" class="menu__link link">
+            <span>Конфиденциальность</span>
+          </a>
+        </li>
+      </ul>
+      <ul class="menu__admin admin">
+        <li class="admin__item item">
+          <a href="https://vk.com/solyanik_original" class="admin__link link">
+            <span>Get help</span>
+          </a>
+        </li>
+    </section>
+    <section class="content">
+      <p class="aligncenter">
+        <img align="middle" src="https://i.stack.imgur.com/Y9bj3.png" width="1280" height="600">
+      </p>
+      <h1><p style="font-size: 36px;">Загрузите ваш CSV файл</p></h1>
+      <form method="POST" action="" enctype="multipart/form-data">
+        <p><input type="file" name="file"></p>
+        <p><input type="submit" value="Отправить"></p>
+        <a href="http://127.0.0.1:5000/result">Посмотреть результаты</a>
+      </form>
+      <p style="font-size: 36px;">Часто необходимо определить качество результатов обучения нейронной сети.
+Для автоматизации оценки результатов обучения нейронной сети, была предложена модель основана на информации о метриках качества обучения модели нейронной сети, из которой, в процессе работы модели, извлекаются предложенные признаки и, в последствии, классифицируются классической моделью машинного обучения на три основные состояния процесса обучения (недообучение, нормальное обучение и переобучение).</p>
+    </section>
+  </body>
+</html>

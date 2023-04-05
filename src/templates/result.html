@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>FLASK CSV File Upload</title>
+    <style>
+      body {
+        width: 100%;
+        min-height: 100vh;
+        background-color: #fff;
+      }
+
+      /* Основные свойства для бокового меню */
+      .menu {
+        display: flex;
+        flex-direction: column; /* размещаем элементы к колонку */
+        width: 350px;
+        min-height: 100vh; /* на всю высоту экрана */
+        position: fixed; /* чтобы меню было фиксированным */
+        top: 0; /* прижимаем к верхнему */
+        left: 0; /* .. и нижнему краю */
+        background-color: #cb4544;
+        box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2); /* задаем тень, чтобы отделить от фона */
+      }
+
+      /* Свойства для контента */
+      .content {
+        padding-left: 390px; /* отступ от бокового меню 240px + 40px */
+        padding-top: 40px;
+        padding-right: 40px;
+        padding-bottom: 40px;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center; /* центрируем логотип с текстом */
+        color: #0a0a0a;
+        font-size: 36px;
+        text-decoration: none;
+        font-family: "Rubik", sans-serif;
+        font-weight: bold;
+      }
+
+      /* Позиционирование лого в меню */
+      .menu__logo {
+        padding-top: 50px;
+        padding-left: 20px;
+        margin-bottom: 59px;
+      }
+
+      /* Позиционирование элементов в меню */
+      .menu__link,
+      .admin__link {
+        padding-left: 30px;
+      }
+
+      /* Свойства для элементов меню */
+      .link {
+        position: relative; /* чтобы задать потом псевдоэлемент */
+        display: flex; /* чтобы элемент тянулся на всю ширину */
+        align-items: center; /* по центру текст и иконка */
+        height: 45px; /* высота элемента 45px */
+        text-decoration: none;
+      }
+
+      /* Свойства иконки внутри ссылки */
+      .link > img {
+        width: 25px;
+        margin-right: 20px;
+      }
+
+      /* Свойства текста внутри ссылки */
+      .link > span {
+        font-family: "Karla", sans-serif;
+        font-size: 20px;
+        color: #0a0a0a;
+      }
+
+      /* При наведении на ссылку - полупрозрачный белый фон */
+      .link:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      /* Выводим черную линию слева */
+      .link:hover:before {
+        display: flex;
+      }
+
+      /* Создаем черную линию слева */
+      .link:before {
+        content: "";
+        display: none;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 5px;
+        height: 100%;
+        background-color: #0a0a0a;
+      }
+
+      /* Позиционирование админ-меню */
+      .menu__admin {
+        margin-top: auto;
+        padding-bottom: 40px;
+      }
+
+      .aligncenter {
+        text-align: center;
+      }
+      .thumb img  {
+        padding: 15px; /* Расстояние от картинки до рамки */
+        background: #fff; /* Цвет фона */
+        margin-right: 50px; /* Отступ справа */
+        margin-bottom: 30px; /* Отступ снизу */
+      }
+    </style>
+</head>
+  <body>
+    <section class="menu">
+      <!-- Логотип -->
+      <a href="http://127.0.0.1:5000/download" class="menu__logo logo">Solyanik Analysis</a>
+      <!-- Основное меню -->
+      <ul class="menu__list list">
+        <!-- Элемент меню -->
+        <li class="menu__item item">
+          <!-- Ссылка меню -->
+          <a href="http://127.0.0.1:5000/download" class="menu__link link">
+            <span>Главная</span>
+          </a>
+        </li>
+        <li class="menu__item item">
+          <a href="http://127.0.0.1:5000/version" class="menu__link link">
+            <span>Версии</span>
+          </a>
+        </li>
+        <li class="menu__item item">
+          <a href="http://127.0.0.1:5000/info" class="menu__link link">
+            <span>Справочная информация</span>
+          </a>
+        </li>
+        <li class="menu__item item">
+          <a href="http://127.0.0.1:5000/autors" class="menu__link link">
+            <span>Авторы</span>
+          </a>
+        </li>
+        <li class="menu__item item">
+          <a href="http://127.0.0.1:5000/privacy" class="menu__link link">
+            <span>Конфиденциальность</span>
+          </a>
+        </li>
+      </ul>
+      <ul class="menu__admin admin">
+        <li class="admin__item item">
+          <a href="https://vk.com/solyanik_original" class="admin__link link">
+            <span>Get help</span>
+          </a>
+        </li>
+    </section>
+    <section class="content">
+        <h1><p style="font-size: 36px;">Результаты анализа результатов обучения нейронной сети:</p></h1>
+        <h2>{{res, unt}}!</h2>
+        <a href="http://127.0.0.1:5000/download">Загрузить другие данные</a>
+        <h1><p style="font-size: 36px;">Для анализа результатов обучения нейронной сети использовались:</p></h1>
+        <p class="thumb">
+            <img align="middle" src="https://psv4.userapi.com/c237231/u160430609/docs/d16/7767e0b23faf/grafik_3.jpg?extra=4hEaqvySxPjkfw2Vu56tTfpJnu7n4nyJc3IdlA0nWIbRi2GazfaSY8tAhJrsjou61gaxstDrjJIbIF6F08s0NafYXNcS5Yl58dZo_3lxLlYK1fyf92dH2wL5U7CghUTbei8QD68qonO-5bWTQoz48xYMCQ" width="720" height="600">
+            <img align="middle" src="https://psv4.userapi.com/c237231/u160430609/docs/d4/a581b814b932/corr_matrix_loss.png?extra=ovye4YbsTS9XB5npc6h_9KtGWnIXOU4ZbTYUvBurSQ2Hz6n0dxwAOB8MU8y987p7jH3OJ1GvT_XULUbBtSFi5gE-J9Qk9xm5tHNsL11K6pBXDeyXzZnL7KJWwf8L0Avzq5GEtKduGCbnDceSWSs8RynxVA" width="720" height="600">
+        </p>
+    </section>
+  </body>
+</html>
